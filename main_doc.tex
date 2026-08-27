@@ -1,0 +1,50 @@
+% !TeX program = xelatex
+\documentclass{gepa}
+
+% Sur Overleaf : Menu > Compiler > XeLaTeX.
+\input{Page titre}
+
+% APA 7e édition en français sur Overleaf (Biber).
+% La solution de repli sert seulement aux installations TeX locales minimales.
+\IfFileExists{apa.bbx}{
+  \usepackage[backend=biber,style=apa,sortlocale=fr_CA]{biblatex}
+  \DeclareLanguageMapping{french}{french-apa}
+  \addbibresource{references.bib}
+}{
+  \usepackage[round,authoryear]{natbib}
+  \let\parencite\citep
+  \let\textcite\citet
+  \newcommand{\printbibliography}{\bibliographystyle{apalike}\bibliography{references}}
+}
+
+\begin{document}
+
+\maketitlegepa
+
+% Décommentez seulement les pages liminaires nécessaires, dans cet ordre.
+% \geparesume{Insérez le résumé ici.}
+% \geparemerciements{Insérez les remerciements ici.}
+% Si une IA générative a contribué au contenu ou à la méthodologie du travail,
+% remplissez « Declaration IA.tex », puis décommentez la ligne suivante.
+% \input{Declaration IA}
+\gepatableofcontents
+% \gepalistoftables
+% \gepalistoffigures
+% \gepaacronymes{\begin{description}\item[ÉPA] École de politique appliquée\end{description}}
+
+\input{écris_ici}
+
+% Selon le GÉPA, placez les annexes AVANT les références bibliographiques.
+% \clearpage
+% \appendix
+% \section{Titre de l'annexe}
+% Contenu de l'annexe.
+
+\clearpage
+\begingroup
+\singlespacing
+\RaggedRight
+\printbibliography
+\endgroup
+
+\end{document}
